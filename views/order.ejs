@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="/css/test.css">
+    <title>CBNUShop</title>
+</head>
+
+<body>
+    <nav>
+        <div class="left">
+            <div class="logo">
+                <img src="images/logo.png">
+            </div>
+            <div class="links">
+                <a href="/order">홈</a>
+                <a href="#" id="logoutButton">로그아웃</a>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <a href="javascript:void(0)" id="purchaseHistoryButton"><i class='bx bx-basket'></i></a>
+        </div>
+
+    </nav>
+
+
+
+    <div class="content">
+        <div class="separator">
+            <h2>베스트 상품</h2>
+            <a href="product-detail" style="color:black">상품 전체 보기<i class='bx bx-chevron-right'></i></a>
+        </div>
+        <div class="courses">
+            <% topProducts.forEach(product=> { %>
+                <div class="item">
+                    <div class="top" style="background-color: #bcb3b3;">
+                        <img src="/assests/<%= product.product_id %>.jpg" alt="<%= product.product_name %>">
+                        <div class="info">
+                            <p style="color:rgb(0, 0, 0); font-weight: bold; font-size: 18px;">
+                                <%= product.product_name %>
+                            </p>
+                        </div>
+                        <div class="buy-now-button">
+                            <button class="buy-now" data-product-id="<%= product.product_id %>">Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="bottom"
+                        style="background-color: #c4c7cc; padding: 10px; border-top: 1px solid #eaeaea;">
+                        <div class="price" style="font-size: 20px; color: #000000;">
+                            <h5 style="margin: 0;">가격: $<%= product.price %>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="bottom"
+                        style="padding: 10px; background-color: #eff1f3; border-top: 1px solid #d3d6d8;">
+                        <div class="review-section">
+                            <h5 style="margin: 10px 0; color: #209fe4; font-size: 24px;">상위 2개 리뷰👍</h5>
+                            <% if (product.topReviews && product.topReviews.length) { %>
+                                <% product.topReviews.forEach((review, index)=> { %>
+                                    <% if (index> 0) { %>
+                                        <hr style="border-top: 1px solid #ccc; margin: 10px 0;">
+                                        <% } %>
+                                            <p
+                                                style="margin: 5px 0; color: #000000; font-size: 20px; font-weight:bold;">
+                                                <%= review.comment %>
+                                            </p>
+                                            <% }); %>
+                                                <% } else { %>
+                                                    <p
+                                                        style="margin: 5px 0; color: #000000; font-size: 20px; font-weight:bold;">
+                                                        아직 리뷰가 쓰이지 않았습니다</p>
+                                                    <% } %>
+
+                                                        <div style="border-bottom: 1px solid #d3d6d8; margin: 20px 0;">
+                                                        </div> <!-- Increased margin for better separation -->
+
+                                                        <h5 style="margin: 10px 0; color: #8a4040; font-size: 24px;">하위
+                                                            2개 리뷰👎</h5>
+                                                        <% if (product.bottomReviews && product.bottomReviews.length) {
+                                                            %>
+                                                            <% product.bottomReviews.forEach((review, index)=> { %>
+                                                                <% if (index> 0) { %>
+                                                                    <hr
+                                                                        style="border-top: 1px solid #ccc; margin: 10px 0;">
+                                                                    <% } %>
+                                                                        <p
+                                                                            style="margin: 5px 0; color: #000000; font-size: 20px; font-weight:bold;">
+                                                                            <%= review.comment %>
+                                                                        </p>
+                                                                        <% }); %>
+                                                                            <% } else { %>
+                                                                                <p
+                                                                                    style="margin: 5px 0; color: #000000; font-size: 20px; font-weight:bold;">
+                                                                                    아직 리뷰가 쓰이지 않았습니다</p>
+                                                                                <% } %>
+                        </div>
+                        <!-- Trigger/Open The Modal Button -->
+                        <button id="viewAllReviewsBtn-<%= product.product_id %>" class="viewAllReviewsBtn">리뷰 전체
+                            보기</button>
+                    </div>
+                    <div class="bottom"
+                    style="background-color: #c4c7cc; padding: 10px; border-top: 1px solid #eaeaea;">
+                    <div class="gptSummary" style="margin-top: 20px; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
+                        <h4 style="color: #333;">GPT 리뷰 요약!</h4>
+                        <p><%= product.gptSummary %></p>
+                    </div>
+                </div>
+                    <!-- The Modal -->
+                    <div id="reviewsModal-<%= product.product_id %>" class="modal"
+                        style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+                        <div class="modal-content"
+                            style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 600px; border-radius: 10px;">
+                            <span class="close"
+                                style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+                            <h2 style="color: #333; margin-bottom: 25px;"><%= product.product_name %>에 대한 모든 리뷰
+                            </h2>
+                            <% if (product.Reviews && product.Reviews.length) { %>
+                                <% product.Reviews.forEach(review=> { %>
+                                    <div style="padding: 10px; margin-bottom: 15px; border-bottom: 1px solid #eee;">
+                                        <p style="color: #555; margin: 0; font-size: 16px;">
+                                            "<%= review.comment %>" - <span
+                                                    style="font-weight: bold; color: <%= review.percent >= 50 ? '#4CAF50' : '#f44336' %>;">
+                                                    <%= review.percent %>% 긍정✍️
+                                                </span>
+                                        </p>
+                                    </div>
+                                    <% }); %>
+                                        <% } else { %>
+                                            <p>아직 리뷰가 쓰이지 않았습니다</p>
+                                            <% } %>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+                <% }) %>
+        </div>
+
+
+
+        <div class="separator">
+            <h2>서비스 리뷰</h2>
+        </div>
+
+        <div class="comments">
+            <p style="color:black">본 사이트를 보다 더 나은 로 개선하기 위한 사용자들의 한 마디</p>
+            <div class="right">
+                <div class="item" style="background-color: #c4c7cc; font-weight:bold; font-size:18px;">
+                    <img src="assests/profile-3.png">
+                    <p>좋아요!</p>
+                </div>
+                <div class="item" style="background-color: #c4c7cc; font-weight:bold; font-size:18px;">
+                    <img src="assests/profile-2.png">
+                    <p>별로에요!</p>
+                </div>
+                <div class="item" style="background-color: #c4c7cc; font-weight:bold; font-size:18px;">
+                    <img src="assests/profile-1.png">
+                    <p>좋아요!</p>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="columns">
+                <div class="col last">
+                    <h5>About Us</h5>
+                    <p>For a better service</p>
+                    <div class="social-links">
+                        <a href="https://github.com/"><i class='bx bxl-github'
+                                style="color:rgb(255, 255, 255);"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="/js/order.js"></script>
+</body>
+
+</html>

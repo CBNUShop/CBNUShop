@@ -1,0 +1,204 @@
+.carousel-item{
+    height: 100vh;
+    min-height: 300px;
+}
+
+.carousel-item img{
+    background-size: cover;
+}
+
+.carousel-caption{
+    bottom: 30%;
+}
+
+.carousel-caption h5{
+    font-size: 45px;
+    margin-bottom: 25px;
+    letter-spacing: 1.7px;
+    color: rgb(6, 58, 6);
+}
+
+.carousel-caption p{
+    width: 100%;
+    margin: auto;
+    font-size: 18px;
+}
+
+.navbar-light .navbar-brand{
+    color: #012a07;
+    font-size: 40px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-item .nav-link{
+    color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.navbar-toggler{
+    background: #ffffff;
+    outline: none !important;
+    font-size: 40px;
+    line-height: 0.3;
+    padding: 1px 5px;
+}
+
+.navbar-nav{
+    text-align: center;
+}
+
+.nav-link{
+    padding: 5px;
+}
+
+
+.form-container {
+    padding: 2rem;
+    background: rgb(170, 195, 121);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-container input,
+.form-container button {
+    margin-top: 10px;
+}
+
+.form-container button {
+    background-color: #4c7555;
+    color: rgb(165, 74, 74);
+}
+
+.containerlogin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 700px;
+    margin: 0vh auto; 
+    background: rgba(44, 18, 37, 0.5); 
+    box-shadow: 0 0 15px rgb(255, 255, 255);
+    border-radius: 25px;
+    border: none;
+    padding: 30px;
+}
+  h2 {
+    font-size: 30px;
+  }
+  
+  form {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+  }
+  .form-item {
+    display: flex;
+    width: 90%;
+    background: transparent;
+    margin: 10px auto;
+    border-radius: 15px;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid rgb(255, 255, 255);
+  }
+  .form-item:hover {
+    border: 1px solid rgb(255, 255, 255);
+  }
+  input {
+    background: transparent;
+    width: 80%;
+    height: 30px;
+    outline: none;
+    border: none;
+    margin: auto;
+    color: white;
+    font-size: 24px;
+  }
+  
+  span {
+    user-select: none;
+    margin: 5px;
+    color: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, 0.637);
+    padding: 5px;
+    border-radius: 18px;
+  }
+  button[type="submit"] {
+    width: 180px;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px auto;
+    padding: 8px;
+    background: rgba(94, 78, 42, 0.72);
+    border: none;
+    color: white;
+  }
+  button[type="submit"]:hover {
+    background: rgba(228, 228, 224, 0.678);
+  }
+  p:first-of-type {
+    margin: 0;
+  }
+  .options {
+    display: flex;
+    margin: 10px auto;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  button {
+    font-size: 18px;
+    padding: 5px 16px;
+    margin: 5px 15px;
+    width: 180px;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    transition: all 0.7s ease;
+  }
+  .fb:hover {
+    background: rgba(55, 53, 207, 0.637);
+    border: none;
+    box-shadow: 0 0 2px rgba(55, 53, 207, 0.637);
+  }
+  .gl:hover {
+    background: rgba(207, 53, 53, 0.671);
+    border: none;
+    box-shadow: 0 0 2px rgba(207, 53, 53, 0.671);
+  }
+  
+  p {
+    font-size: 18px;
+    margin: 5px;
+  }
+  a {
+    color: white;
+  }
+  a:hover {
+    color: rgb(255, 255, 255);
+  }
+  
+  input::placeholder {
+    color: rgb(253, 245, 230); 
+    opacity: 1; 
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+::-webkit-input-placeholder {
+  color: white;
+}
+::-moz-placeholder {
+  color: white;
+  opacity: 1;
+}
+:-ms-input-placeholder {
+  color: white;
+}
+:-moz-placeholder { 
+  color: white;
+  opacity: 1;
+}

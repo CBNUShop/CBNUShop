@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="/css/test.css">
+    <title>CBNUShop</title>
+</head>
+
+<body>
+    <nav>
+        <div class="left">
+            <div class="logo">
+                <img src="images/logo.png">
+            </div>
+            <div class="links">
+                <a href="/order">홈</a>
+                <a href="#" id="logoutButton">로그아웃</a>
+            </div>
+        </div>
+      
+
+    </nav>
+
+    <main class="main-content" style="background-image: url('assests/bg.jpg');">
+        <div class="container">
+            <h2 class="section-title">구매 내역</h2>
+            <div class="purchase-list">
+                <% purchases.forEach(purchase => { %>
+                    <div class="purchase-item">
+                        <div class="purchase-item-image">
+                            <img src="/assests/<%= purchase.Product.product_id %>.jpg" alt="<%= purchase.Product.product_name %>" class="img-responsive">
+                        </div>
+                        <div class="purchase-item-details">
+                            <h3 class="purchase-item-title"><%= purchase.Product.product_name %></h3>
+                            <p class="purchase-item-price">가격: $<%= purchase.Product.price %></p>
+                            <p class="purchase-item-date">구매 날짜: <%= purchase.purchase_date %></p>
+                        </div>
+                        <form action="/submit-review" method="post" class="review-form" style="padding: 15px; background-color: #f8f9fa; border-radius: 5px; margin-top: 20px;">
+                            <input type="hidden" name="productId" value="<%= purchase.Product.product_id %>" style="display: none;">
+                            <textarea name="reviewText" placeholder="리뷰를 작성하세요..." required style="width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px; margin-bottom: 10px;"></textarea>
+                            <button type="submit" class="btn btn-primary" style="background-color: #585d62; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">리뷰 제출</button>
+                        </form>                        
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </main>
+    
+        <script src="/js/order.js"></script>
+</body>
+
+</html>
